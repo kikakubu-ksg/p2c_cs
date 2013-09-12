@@ -25,18 +25,6 @@ namespace p2c_cs.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool ASF_Check {
-            get {
-                return ((bool)(this["ASF_Check"]));
-            }
-            set {
-                this["ASF_Check"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int ASF_CoverRadio {
             get {
@@ -49,10 +37,10 @@ namespace p2c_cs.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string ASF_CoverSec {
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int ASF_CoverSec {
             get {
-                return ((string)(this["ASF_CoverSec"]));
+                return ((int)(this["ASF_CoverSec"]));
             }
             set {
                 this["ASF_CoverSec"] = value;
@@ -121,18 +109,6 @@ namespace p2c_cs.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool DAT_Check {
-            get {
-                return ((bool)(this["DAT_Check"]));
-            }
-            set {
-                this["DAT_Check"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string FFMPEG_EXEC {
             get {
@@ -140,6 +116,18 @@ namespace p2c_cs.Properties {
             }
             set {
                 this["FFMPEG_EXEC"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ASF_FILE {
+            get {
+                return ((string)(this["ASF_FILE"]));
+            }
+            set {
+                this["ASF_FILE"] = value;
             }
         }
     }

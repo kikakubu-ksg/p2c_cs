@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.Diagnostics;
 
@@ -12,8 +8,6 @@ namespace p2c_cs
 {
     public partial class main : Form
     {
-
-
         public string ExecPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
         //編集フォーム
 
@@ -25,19 +19,19 @@ namespace p2c_cs
         private void main_Load(System.Object sender, System.EventArgs e)
         {
             //初期化
-            Button_Exec.Enabled = false;
-            CheckBox_Dat.Checked = Properties.Settings.Default.DAT_Check;
-            if (CheckBox_Dat.Checked == false)
-            {
-                GroupBox_DAT.Enabled = false;
-                Button_Exec.Enabled = true;
-            }
-            CheckBox_Asf.Checked = Properties.Settings.Default.ASF_Check;
-            if (CheckBox_Asf.Checked == false)
-            {
-                GroupBox_Asf.Enabled = false;
-                Button_Exec.Enabled = true;
-            }
+            //Button_Exec.Enabled = false;
+            //CheckBox_Dat.Checked = Properties.Settings.Default.DAT_Check;
+            //if (CheckBox_Dat.Checked == false)
+            //{
+            //    GroupBox_DAT.Enabled = false;
+            //    Button_Exec.Enabled = true;
+            //}
+            //CheckBox_Asf.Checked = Properties.Settings.Default.ASF_Check;
+            //if (CheckBox_Asf.Checked == false)
+            //{
+            //    GroupBox_Asf.Enabled = false;
+            //    Button_Exec.Enabled = true;
+            //}
             if (Properties.Settings.Default.ASF_StartTimeRadio == 1)
             {
                 RadioButton_StartTimeNum.Checked = true;
@@ -69,7 +63,10 @@ namespace p2c_cs
             TextBox_ImageSetHeight.Text = Properties.Settings.Default.ASF_ImageHeight.ToString();
             TextBox_ImageSetWidth.Text = Properties.Settings.Default.ASF_ImageWidth.ToString();
 
-            TextBox_CoverSetSec.Text = Properties.Settings.Default.ASF_CoverSec;
+            TextBox_CoverSetSec.Text = Properties.Settings.Default.ASF_CoverSec.ToString();
+
+            TextBox_FFmpegPath.Text = Properties.Settings.Default.FFMPEG_EXEC;
+            TextBox_AsfPath.Text = Properties.Settings.Default.ASF_FILE;
 
             TextBox_DatUseNumStart.Text = "1";
             TextBox_DatUseNumEnd.Text = "50";
@@ -77,6 +74,7 @@ namespace p2c_cs
             DataGridView_Log.RowHeadersVisible = false;
 
             //編集フォーム
+            Form.parent = this;
             Form.Visible = true;
 
 
@@ -94,6 +92,7 @@ namespace p2c_cs
             else
             {
                 Properties.Settings.Default.ASF_ImageWidth = int.Parse(TextBox_ImageSetWidth.Text);
+                Properties.Settings.Default.Save();
             }
 
         }
@@ -110,22 +109,14 @@ namespace p2c_cs
             else
             {
                 Properties.Settings.Default.ASF_ImageHeight = int.Parse(TextBox_ImageSetHeight.Text);
+                Properties.Settings.Default.Save();
             }
         }
 
         private void TextBox_CoverSetSec_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!common.IsNumeric(TextBox_CoverSetSec.Text) & !string.IsNullOrEmpty(TextBox_CoverSetSec.Text))
-            {
-                MessageBox.Show("数値のみ入力可能です。", null,
-                     MessageBoxButtons.OK,
-                     MessageBoxIcon.Error);
-                e.Cancel = true;
-            }
-            else
-            {
-                Properties.Settings.Default.ASF_CoverSec = TextBox_CoverSetSec.Text;
-            }
+            Properties.Settings.Default.ASF_CoverSec = int.Parse(TextBox_CoverSetSec.Text);
+            Properties.Settings.Default.Save();
         }
 
         private void TextBox_DatUseNumStart_Validating(object sender, System.ComponentModel.CancelEventArgs e)
@@ -145,6 +136,7 @@ namespace p2c_cs
             if (RadioButton_StartTimeNum.Checked)
             {
                 Properties.Settings.Default.ASF_StartTimeRadio = 1;
+                Properties.Settings.Default.Save();
                 TextBox_StartTimeSet.Enabled = false;
             }
         }
@@ -154,6 +146,7 @@ namespace p2c_cs
             if (RadioButton_StartTimeSet.Checked)
             {
                 Properties.Settings.Default.ASF_StartTimeRadio = 2;
+                Properties.Settings.Default.Save();
                 TextBox_StartTimeSet.Enabled = true;
             }
         }
@@ -163,6 +156,7 @@ namespace p2c_cs
             if (RadioButton_EndTimeSaveTime.Checked)
             {
                 Properties.Settings.Default.ASF_EndTimeRadio = 1;
+                Properties.Settings.Default.Save();
                 TextBox_EndTimeSet.Enabled = false;
             }
         }
@@ -172,6 +166,7 @@ namespace p2c_cs
             if (RadioButton_EndTimeSet.Checked)
             {
                 Properties.Settings.Default.ASF_EndTimeRadio = 2;
+                Properties.Settings.Default.Save();
                 TextBox_EndTimeSet.Enabled = true;
             }
         }
@@ -181,6 +176,7 @@ namespace p2c_cs
             if (RadioButton_ImageNormal.Checked)
             {
                 Properties.Settings.Default.ASF_ImageRadio = 1;
+                Properties.Settings.Default.Save();
                 TextBox_ImageSetHeight.Enabled = false;
                 TextBox_ImageSetWidth.Enabled = false;
             }
@@ -191,49 +187,50 @@ namespace p2c_cs
             if (RadioButton_ImageSet.Checked)
             {
                 Properties.Settings.Default.ASF_ImageRadio = 2;
+                Properties.Settings.Default.Save();
                 TextBox_ImageSetHeight.Enabled = true;
                 TextBox_ImageSetWidth.Enabled = true;
             }
         }
 
-        private void CheckBox_Dat_CheckedChanged(System.Object sender, System.EventArgs e)
-        {
-            if (CheckBox_Dat.Checked)
-            {
-                Properties.Settings.Default.DAT_Check = true;
-                GroupBox_DAT.Enabled = true;
-                Button_Exec.Enabled = true;
-            }
-            else
-            {
-                Properties.Settings.Default.DAT_Check = false;
-                GroupBox_DAT.Enabled = false;
-                if (CheckBox_Asf.Checked == false)
-                {
-                    Button_Exec.Enabled = false;
-                }
+        //private void CheckBox_Dat_CheckedChanged(System.Object sender, System.EventArgs e)
+        //{
+        //    if (CheckBox_Dat.Checked)
+        //    {
+        //        Properties.Settings.Default.DAT_Check = true;
+        //        GroupBox_DAT.Enabled = true;
+        //        Button_Exec.Enabled = true;
+        //    }
+        //    else
+        //    {
+        //        Properties.Settings.Default.DAT_Check = false;
+        //        GroupBox_DAT.Enabled = false;
+        //        if (CheckBox_Asf.Checked == false)
+        //        {
+        //            Button_Exec.Enabled = false;
+        //        }
 
-            }
-        }
+        //    }
+        //}
 
-        private void CheckBox_Asf_CheckedChanged(System.Object sender, System.EventArgs e)
-        {
-            if (CheckBox_Asf.Checked)
-            {
-                Properties.Settings.Default.ASF_Check = true;
-                GroupBox_Asf.Enabled = true;
-                Button_Exec.Enabled = true;
-            }
-            else
-            {
-                Properties.Settings.Default.ASF_Check = false;
-                GroupBox_Asf.Enabled = false;
-                if (CheckBox_Dat.Checked == false)
-                {
-                    Button_Exec.Enabled = false;
-                }
-            }
-        }
+        //private void CheckBox_Asf_CheckedChanged(System.Object sender, System.EventArgs e)
+        //{
+        //    if (CheckBox_Asf.Checked)
+        //    {
+        //        Properties.Settings.Default.ASF_Check = true;
+        //        GroupBox_Asf.Enabled = true;
+        //        Button_Exec.Enabled = true;
+        //    }
+        //    else
+        //    {
+        //        Properties.Settings.Default.ASF_Check = false;
+        //        GroupBox_Asf.Enabled = false;
+        //        if (CheckBox_Dat.Checked == false)
+        //        {
+        //            Button_Exec.Enabled = false;
+        //        }
+        //    }
+        //}
 
 
         //Private Sub TextBox_StartTimeSet_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles TextBox_StartTimeSet.Validating
@@ -312,6 +309,16 @@ namespace p2c_cs
             FileDragEnter(sender, e);
         }
 
+        private void TextBox_DatPath_Haven_DragDrop(object sender, System.Windows.Forms.DragEventArgs e)
+        {
+            FileDragDrop(sender, e);
+        }
+
+        private void TextBox_DatPath_Haven_DragEnter(object sender, System.Windows.Forms.DragEventArgs e)
+        {
+            FileDragEnter(sender, e);
+        }
+
         private void TextBox_AsfPath_DragDrop(object sender, System.Windows.Forms.DragEventArgs e)
         {
             FileDragDrop(sender, e);
@@ -321,12 +328,12 @@ namespace p2c_cs
         {
             FileDragEnter(sender, e);
         }
-        private void TextBox_OutputTempPath_DragDrop(object sender, System.Windows.Forms.DragEventArgs e)
+        private void TextBox_FFmpegPath_DragDrop(object sender, System.Windows.Forms.DragEventArgs e)
         {
             FileDragDrop(sender, e);
         }
 
-        private void TextBox_OutputTempPath_DragEnter(object sender, System.Windows.Forms.DragEventArgs e)
+        private void TextBox_FFmpegPath_DragEnter(object sender, System.Windows.Forms.DragEventArgs e)
         {
             FileDragEnter(sender, e);
         }
@@ -339,7 +346,7 @@ namespace p2c_cs
             string[] fileName =
                 (string[])e.Data.GetData(DataFormats.FileDrop, false);
             TextBox tb = (TextBox)sender;
-            tb.Text = fileName[1];
+            tb.Text = fileName[0];
         }
 
         public void FileDragEnter(object sender,
@@ -370,13 +377,23 @@ namespace p2c_cs
                 i = 1;
             }
             //画像クリア
-            foreach (string tempFile in System.IO.Directory.GetFiles(common.GetExeAppPath() + "\\tmp"))
+            try
             {
-                System.IO.File.Delete(tempFile);
-            }
-            i = 1 / i;
+                foreach (string tempFile in System.IO.Directory.GetFiles(common.GetExeAppPath() + "\\tmp"))
+                {
+                    System.IO.File.Delete(tempFile);
+                }
+                i = 1 / i;
 
-            Process.Start(System.Windows.Forms.Application.StartupPath + "\\ffmpeg\\ffmpeg.exe", " -i \"" + TextBox_AsfPath.Text + "\" -an -ss 00:00:00 -r " + i + " -threads " + Environment.ProcessorCount.ToString() + " \"" + System.Windows.Forms.Application.StartupPath + "\\tmp\\image%08d.jpg\"");
+                Process.Start(TextBox_FFmpegPath.Text, " -i \"" + TextBox_AsfPath.Text +
+                    "\" -an -ss 00:00:00 -r " + i + " -threads " + Environment.ProcessorCount.ToString() +
+                    " \"" + System.Windows.Forms.Application.StartupPath + "\\tmp\\image%08d.jpg\"");
+            }
+            catch (SystemException ex)
+            {
+                MessageBox.Show("画像抽出に失敗しました。\r\n" + ex.Message);
+                return;
+            }
         }
 
         private void Button1_Click(System.Object sender, System.EventArgs e)
@@ -400,10 +417,6 @@ namespace p2c_cs
                 return;
 
             }
-            finally
-            {
-            }
-
 
             // 読み込んだ結果をすべて格納するための変数を宣言する
             string stResult = string.Empty;
@@ -532,7 +545,7 @@ namespace p2c_cs
                 //レス時刻を秒に直す
                 long tick = list[j].datetime.ToLocalTime().Ticks;
 
-                if (!string.IsNullOrEmpty(TextBox_LiveStartTime.Text))
+                if (!string.IsNullOrEmpty(DateTimePicker_LiveStartTime.Text))
                 {
                     try
                     {
@@ -601,14 +614,9 @@ namespace p2c_cs
 
         }
 
-
-        private void TabPage_Config_Click(System.Object sender, System.EventArgs e)
-        {
-        }
-
         private void TextBox_LiveStartTime_Validating(System.Object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!string.IsNullOrEmpty(TextBox_LiveStartTime.Text))
+            if (!string.IsNullOrEmpty(DateTimePicker_LiveStartTime.Text))
             {
                 e.Cancel = true;
                 return;
@@ -685,6 +693,18 @@ namespace p2c_cs
                 //文字列の長さを比較する
                 return ((Response)x).datetime.CompareTo(((Response)y).datetime);
             }
+        }
+
+        private void TextBox_FFmpegPath_TextChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.FFMPEG_EXEC = TextBox_FFmpegPath.Text;
+            Properties.Settings.Default.Save();
+        }
+
+        private void TextBox_AsfPath_TextChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.ASF_FILE = TextBox_AsfPath.Text;
+            Properties.Settings.Default.Save();
         }
 
     }

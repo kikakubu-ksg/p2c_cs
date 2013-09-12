@@ -31,9 +31,6 @@
             this.TabControl_Config = new System.Windows.Forms.TabControl();
             this.TabPage_Config = new System.Windows.Forms.TabPage();
             this.GroupBox_Asf = new System.Windows.Forms.GroupBox();
-            this.Button_GetLiveStartTime = new System.Windows.Forms.Button();
-            this.TextBox_LiveStartTime = new System.Windows.Forms.TextBox();
-            this.Label_LiveStartTime = new System.Windows.Forms.Label();
             this.Label_AsfPath = new System.Windows.Forms.Label();
             this.Button_Exec = new System.Windows.Forms.Button();
             this.TextBox_AsfPath = new System.Windows.Forms.TextBox();
@@ -57,17 +54,6 @@
             this.TextBox_StartTimeSet = new System.Windows.Forms.TextBox();
             this.RadioButton_StartTimeSet = new System.Windows.Forms.RadioButton();
             this.RadioButton_StartTimeNum = new System.Windows.Forms.RadioButton();
-            this.GroupBox_DAT = new System.Windows.Forms.GroupBox();
-            this.CheckBox_SetTime = new System.Windows.Forms.CheckBox();
-            this.TextBox_DatUseNumEnd = new System.Windows.Forms.TextBox();
-            this.TextBox_DatPath = new System.Windows.Forms.TextBox();
-            this.TextBox_DatUseNumStart = new System.Windows.Forms.TextBox();
-            this.Label_DatUseNumExp = new System.Windows.Forms.Label();
-            this.Label_DatUseNum = new System.Windows.Forms.Label();
-            this.Label_DatPath = new System.Windows.Forms.Label();
-            this.Button_DatPathRef = new System.Windows.Forms.Button();
-            this.CheckBox_Asf = new System.Windows.Forms.CheckBox();
-            this.CheckBox_Dat = new System.Windows.Forms.CheckBox();
             this.Tabpage_Haven = new System.Windows.Forms.TabPage();
             this.GroupBox1 = new System.Windows.Forms.GroupBox();
             this.TextBox_DatUseNumEnd_Haven = new System.Windows.Forms.TextBox();
@@ -85,6 +71,21 @@
             this.OpenFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.OpenFileDialog3 = new System.Windows.Forms.OpenFileDialog();
             this.Button1 = new System.Windows.Forms.Button();
+            this.GroupBox_DAT = new System.Windows.Forms.GroupBox();
+            this.TextBox_DatUseNumEnd = new System.Windows.Forms.TextBox();
+            this.TextBox_DatPath = new System.Windows.Forms.TextBox();
+            this.TextBox_DatUseNumStart = new System.Windows.Forms.TextBox();
+            this.Label_DatUseNumExp = new System.Windows.Forms.Label();
+            this.Label_DatUseNum = new System.Windows.Forms.Label();
+            this.Label_DatPath = new System.Windows.Forms.Label();
+            this.Button_DatPathRef = new System.Windows.Forms.Button();
+            this.groupBox_ffmpeg = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.TextBox_FFmpegPath = new System.Windows.Forms.TextBox();
+            this.Button_FFmpegPath = new System.Windows.Forms.Button();
+            this.Button_GetLiveStartTime = new System.Windows.Forms.Button();
+            this.Label_LiveStartTime = new System.Windows.Forms.Label();
+            this.DateTimePicker_LiveStartTime = new System.Windows.Forms.DateTimePicker();
             this.TabControl_Config.SuspendLayout();
             this.TabPage_Config.SuspendLayout();
             this.GroupBox_Asf.SuspendLayout();
@@ -92,11 +93,12 @@
             this.GroupBox_Image.SuspendLayout();
             this.GroupBox_Cover.SuspendLayout();
             this.GroupBox_StartTime.SuspendLayout();
-            this.GroupBox_DAT.SuspendLayout();
             this.Tabpage_Haven.SuspendLayout();
             this.GroupBox1.SuspendLayout();
             this.TabPage_Log.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView_Log)).BeginInit();
+            this.GroupBox_DAT.SuspendLayout();
+            this.groupBox_ffmpeg.SuspendLayout();
             this.SuspendLayout();
             // 
             // TabControl_Config
@@ -112,62 +114,32 @@
             // 
             // TabPage_Config
             // 
+            this.TabPage_Config.Controls.Add(this.groupBox_ffmpeg);
             this.TabPage_Config.Controls.Add(this.GroupBox_Asf);
-            this.TabPage_Config.Controls.Add(this.GroupBox_DAT);
-            this.TabPage_Config.Controls.Add(this.CheckBox_Asf);
-            this.TabPage_Config.Controls.Add(this.CheckBox_Dat);
+            this.TabPage_Config.Controls.Add(this.Button_Exec);
             this.TabPage_Config.Location = new System.Drawing.Point(4, 22);
             this.TabPage_Config.Name = "TabPage_Config";
             this.TabPage_Config.Padding = new System.Windows.Forms.Padding(3);
             this.TabPage_Config.Size = new System.Drawing.Size(483, 401);
             this.TabPage_Config.TabIndex = 0;
-            this.TabPage_Config.Text = "設定";
+            this.TabPage_Config.Text = "画像抽出";
             this.TabPage_Config.UseVisualStyleBackColor = true;
             // 
             // GroupBox_Asf
             // 
-            this.GroupBox_Asf.Controls.Add(this.Button_GetLiveStartTime);
-            this.GroupBox_Asf.Controls.Add(this.TextBox_LiveStartTime);
-            this.GroupBox_Asf.Controls.Add(this.Label_LiveStartTime);
             this.GroupBox_Asf.Controls.Add(this.Label_AsfPath);
-            this.GroupBox_Asf.Controls.Add(this.Button_Exec);
             this.GroupBox_Asf.Controls.Add(this.TextBox_AsfPath);
             this.GroupBox_Asf.Controls.Add(this.Button_AsfPath);
             this.GroupBox_Asf.Controls.Add(this.GroupBox_EndTime);
             this.GroupBox_Asf.Controls.Add(this.GroupBox_Image);
             this.GroupBox_Asf.Controls.Add(this.GroupBox_Cover);
             this.GroupBox_Asf.Controls.Add(this.GroupBox_StartTime);
-            this.GroupBox_Asf.Location = new System.Drawing.Point(9, 137);
+            this.GroupBox_Asf.Location = new System.Drawing.Point(10, 73);
             this.GroupBox_Asf.Name = "GroupBox_Asf";
-            this.GroupBox_Asf.Size = new System.Drawing.Size(465, 258);
+            this.GroupBox_Asf.Size = new System.Drawing.Size(465, 199);
             this.GroupBox_Asf.TabIndex = 5;
             this.GroupBox_Asf.TabStop = false;
             this.GroupBox_Asf.Text = "動画ファイル";
-            // 
-            // Button_GetLiveStartTime
-            // 
-            this.Button_GetLiveStartTime.Location = new System.Drawing.Point(344, 192);
-            this.Button_GetLiveStartTime.Name = "Button_GetLiveStartTime";
-            this.Button_GetLiveStartTime.Size = new System.Drawing.Size(111, 23);
-            this.Button_GetLiveStartTime.TabIndex = 27;
-            this.Button_GetLiveStartTime.Text = "ファイル名から取得";
-            this.Button_GetLiveStartTime.UseVisualStyleBackColor = true;
-            // 
-            // TextBox_LiveStartTime
-            // 
-            this.TextBox_LiveStartTime.Location = new System.Drawing.Point(92, 193);
-            this.TextBox_LiveStartTime.Name = "TextBox_LiveStartTime";
-            this.TextBox_LiveStartTime.Size = new System.Drawing.Size(244, 19);
-            this.TextBox_LiveStartTime.TabIndex = 26;
-            // 
-            // Label_LiveStartTime
-            // 
-            this.Label_LiveStartTime.AutoSize = true;
-            this.Label_LiveStartTime.Location = new System.Drawing.Point(9, 197);
-            this.Label_LiveStartTime.Name = "Label_LiveStartTime";
-            this.Label_LiveStartTime.Size = new System.Drawing.Size(77, 12);
-            this.Label_LiveStartTime.TabIndex = 25;
-            this.Label_LiveStartTime.Text = "配信開始時刻";
             // 
             // Label_AsfPath
             // 
@@ -175,13 +147,13 @@
             this.Label_AsfPath.Location = new System.Drawing.Point(15, 21);
             this.Label_AsfPath.Margin = new System.Windows.Forms.Padding(3);
             this.Label_AsfPath.Name = "Label_AsfPath";
-            this.Label_AsfPath.Size = new System.Drawing.Size(39, 12);
+            this.Label_AsfPath.Size = new System.Drawing.Size(58, 12);
             this.Label_AsfPath.TabIndex = 10;
-            this.Label_AsfPath.Text = "ファイル";
+            this.Label_AsfPath.Text = "ファイルパス";
             // 
             // Button_Exec
             // 
-            this.Button_Exec.Location = new System.Drawing.Point(366, 229);
+            this.Button_Exec.Location = new System.Drawing.Point(388, 278);
             this.Button_Exec.Name = "Button_Exec";
             this.Button_Exec.Size = new System.Drawing.Size(89, 23);
             this.Button_Exec.TabIndex = 24;
@@ -196,6 +168,9 @@
             this.TextBox_AsfPath.Name = "TextBox_AsfPath";
             this.TextBox_AsfPath.Size = new System.Drawing.Size(327, 19);
             this.TextBox_AsfPath.TabIndex = 6;
+            this.TextBox_AsfPath.TextChanged += new System.EventHandler(this.TextBox_AsfPath_TextChanged);
+            this.TextBox_AsfPath.DragDrop += new System.Windows.Forms.DragEventHandler(this.TextBox_AsfPath_DragDrop);
+            this.TextBox_AsfPath.DragEnter += new System.Windows.Forms.DragEventHandler(this.TextBox_AsfPath_DragEnter);
             // 
             // Button_AsfPath
             // 
@@ -205,6 +180,7 @@
             this.Button_AsfPath.TabIndex = 7;
             this.Button_AsfPath.Text = "参照";
             this.Button_AsfPath.UseVisualStyleBackColor = true;
+            this.Button_AsfPath.Click += new System.EventHandler(this.Button_AsfPath_Click);
             // 
             // GroupBox_EndTime
             // 
@@ -217,7 +193,7 @@
             this.GroupBox_EndTime.Size = new System.Drawing.Size(220, 68);
             this.GroupBox_EndTime.TabIndex = 1;
             this.GroupBox_EndTime.TabStop = false;
-            this.GroupBox_EndTime.Text = "終了日時";
+            this.GroupBox_EndTime.Text = "終了時間";
             // 
             // Label2
             // 
@@ -244,6 +220,7 @@
             this.RadioButton_EndTimeSet.TabIndex = 13;
             this.RadioButton_EndTimeSet.Text = "指定";
             this.RadioButton_EndTimeSet.UseVisualStyleBackColor = true;
+            this.RadioButton_EndTimeSet.CheckedChanged += new System.EventHandler(this.RadioButton_EndTimeSet_CheckedChanged);
             // 
             // RadioButton_EndTimeSaveTime
             // 
@@ -254,6 +231,7 @@
             this.RadioButton_EndTimeSaveTime.TabIndex = 12;
             this.RadioButton_EndTimeSaveTime.Text = "最後まで";
             this.RadioButton_EndTimeSaveTime.UseVisualStyleBackColor = true;
+            this.RadioButton_EndTimeSaveTime.CheckedChanged += new System.EventHandler(this.RadioButton_EndTimeSaveTime_CheckedChanged);
             // 
             // GroupBox_Image
             // 
@@ -284,6 +262,7 @@
             this.TextBox_ImageSetHeight.Name = "TextBox_ImageSetHeight";
             this.TextBox_ImageSetHeight.Size = new System.Drawing.Size(40, 19);
             this.TextBox_ImageSetHeight.TabIndex = 18;
+            this.TextBox_ImageSetHeight.Validating += new System.ComponentModel.CancelEventHandler(this.TextBox_ImageSetHeight_Validating);
             // 
             // TextBox_ImageSetWidth
             // 
@@ -291,6 +270,7 @@
             this.TextBox_ImageSetWidth.Name = "TextBox_ImageSetWidth";
             this.TextBox_ImageSetWidth.Size = new System.Drawing.Size(40, 19);
             this.TextBox_ImageSetWidth.TabIndex = 17;
+            this.TextBox_ImageSetWidth.Validating += new System.ComponentModel.CancelEventHandler(this.TextBox_ImageSetWidth_Validating);
             // 
             // RadioButton_ImageSet
             // 
@@ -301,6 +281,7 @@
             this.RadioButton_ImageSet.TabIndex = 16;
             this.RadioButton_ImageSet.Text = "サイズ指定";
             this.RadioButton_ImageSet.UseVisualStyleBackColor = true;
+            this.RadioButton_ImageSet.CheckedChanged += new System.EventHandler(this.RadioButton_ImageSet_CheckedChanged);
             // 
             // RadioButton_ImageNormal
             // 
@@ -311,6 +292,7 @@
             this.RadioButton_ImageNormal.TabIndex = 15;
             this.RadioButton_ImageNormal.Text = "フルサイズ";
             this.RadioButton_ImageNormal.UseVisualStyleBackColor = true;
+            this.RadioButton_ImageNormal.CheckedChanged += new System.EventHandler(this.RadioButton_ImageNormal_CheckedChanged);
             // 
             // GroupBox_Cover
             // 
@@ -338,6 +320,7 @@
             this.TextBox_CoverSetSec.Name = "TextBox_CoverSetSec";
             this.TextBox_CoverSetSec.Size = new System.Drawing.Size(40, 19);
             this.TextBox_CoverSetSec.TabIndex = 21;
+            this.TextBox_CoverSetSec.Validating += new System.ComponentModel.CancelEventHandler(this.TextBox_CoverSetSec_Validating);
             // 
             // GroupBox_StartTime
             // 
@@ -350,7 +333,7 @@
             this.GroupBox_StartTime.Size = new System.Drawing.Size(220, 68);
             this.GroupBox_StartTime.TabIndex = 0;
             this.GroupBox_StartTime.TabStop = false;
-            this.GroupBox_StartTime.Text = "開始日時";
+            this.GroupBox_StartTime.Text = "開始時間";
             // 
             // Label1
             // 
@@ -377,6 +360,7 @@
             this.RadioButton_StartTimeSet.TabIndex = 9;
             this.RadioButton_StartTimeSet.Text = "指定";
             this.RadioButton_StartTimeSet.UseVisualStyleBackColor = true;
+            this.RadioButton_StartTimeSet.CheckedChanged += new System.EventHandler(this.RadioButton_StartTimeSet_CheckedChanged);
             // 
             // RadioButton_StartTimeNum
             // 
@@ -387,127 +371,22 @@
             this.RadioButton_StartTimeNum.TabIndex = 8;
             this.RadioButton_StartTimeNum.Text = "最初から";
             this.RadioButton_StartTimeNum.UseVisualStyleBackColor = true;
-            // 
-            // GroupBox_DAT
-            // 
-            this.GroupBox_DAT.Controls.Add(this.CheckBox_SetTime);
-            this.GroupBox_DAT.Controls.Add(this.TextBox_DatUseNumEnd);
-            this.GroupBox_DAT.Controls.Add(this.TextBox_DatPath);
-            this.GroupBox_DAT.Controls.Add(this.TextBox_DatUseNumStart);
-            this.GroupBox_DAT.Controls.Add(this.Label_DatUseNumExp);
-            this.GroupBox_DAT.Controls.Add(this.Label_DatUseNum);
-            this.GroupBox_DAT.Controls.Add(this.Label_DatPath);
-            this.GroupBox_DAT.Controls.Add(this.Button_DatPathRef);
-            this.GroupBox_DAT.Location = new System.Drawing.Point(12, 34);
-            this.GroupBox_DAT.Name = "GroupBox_DAT";
-            this.GroupBox_DAT.Size = new System.Drawing.Size(462, 71);
-            this.GroupBox_DAT.TabIndex = 0;
-            this.GroupBox_DAT.TabStop = false;
-            this.GroupBox_DAT.Text = "datファイル";
-            // 
-            // CheckBox_SetTime
-            // 
-            this.CheckBox_SetTime.AutoSize = true;
-            this.CheckBox_SetTime.Location = new System.Drawing.Point(251, 46);
-            this.CheckBox_SetTime.Name = "CheckBox_SetTime";
-            this.CheckBox_SetTime.Size = new System.Drawing.Size(152, 16);
-            this.CheckBox_SetTime.TabIndex = 9;
-            this.CheckBox_SetTime.Text = "レス時刻付近の画像を使う";
-            this.CheckBox_SetTime.UseVisualStyleBackColor = true;
-            this.CheckBox_SetTime.Visible = false;
-            // 
-            // TextBox_DatUseNumEnd
-            // 
-            this.TextBox_DatUseNumEnd.BackColor = System.Drawing.SystemColors.Window;
-            this.TextBox_DatUseNumEnd.Location = new System.Drawing.Point(143, 44);
-            this.TextBox_DatUseNumEnd.Name = "TextBox_DatUseNumEnd";
-            this.TextBox_DatUseNumEnd.Size = new System.Drawing.Size(31, 19);
-            this.TextBox_DatUseNumEnd.TabIndex = 8;
-            // 
-            // TextBox_DatPath
-            // 
-            this.TextBox_DatPath.AllowDrop = true;
-            this.TextBox_DatPath.BackColor = System.Drawing.SystemColors.Window;
-            this.TextBox_DatPath.Location = new System.Drawing.Point(76, 18);
-            this.TextBox_DatPath.Name = "TextBox_DatPath";
-            this.TextBox_DatPath.Size = new System.Drawing.Size(327, 19);
-            this.TextBox_DatPath.TabIndex = 1;
-            // 
-            // TextBox_DatUseNumStart
-            // 
-            this.TextBox_DatUseNumStart.BackColor = System.Drawing.SystemColors.Window;
-            this.TextBox_DatUseNumStart.Location = new System.Drawing.Point(76, 44);
-            this.TextBox_DatUseNumStart.Name = "TextBox_DatUseNumStart";
-            this.TextBox_DatUseNumStart.Size = new System.Drawing.Size(31, 19);
-            this.TextBox_DatUseNumStart.TabIndex = 4;
-            // 
-            // Label_DatUseNumExp
-            // 
-            this.Label_DatUseNumExp.AutoSize = true;
-            this.Label_DatUseNumExp.Location = new System.Drawing.Point(113, 48);
-            this.Label_DatUseNumExp.Name = "Label_DatUseNumExp";
-            this.Label_DatUseNumExp.Size = new System.Drawing.Size(23, 12);
-            this.Label_DatUseNumExp.TabIndex = 7;
-            this.Label_DatUseNumExp.Text = "から";
-            // 
-            // Label_DatUseNum
-            // 
-            this.Label_DatUseNum.AutoSize = true;
-            this.Label_DatUseNum.Location = new System.Drawing.Point(12, 46);
-            this.Label_DatUseNum.Margin = new System.Windows.Forms.Padding(3);
-            this.Label_DatUseNum.Name = "Label_DatUseNum";
-            this.Label_DatUseNum.Size = new System.Drawing.Size(47, 12);
-            this.Label_DatUseNum.TabIndex = 6;
-            this.Label_DatUseNum.Text = "レス番号";
-            // 
-            // Label_DatPath
-            // 
-            this.Label_DatPath.AutoSize = true;
-            this.Label_DatPath.Location = new System.Drawing.Point(12, 18);
-            this.Label_DatPath.Margin = new System.Windows.Forms.Padding(3);
-            this.Label_DatPath.Name = "Label_DatPath";
-            this.Label_DatPath.Size = new System.Drawing.Size(39, 12);
-            this.Label_DatPath.TabIndex = 4;
-            this.Label_DatPath.Text = "ファイル";
-            // 
-            // Button_DatPathRef
-            // 
-            this.Button_DatPathRef.Location = new System.Drawing.Point(410, 16);
-            this.Button_DatPathRef.Name = "Button_DatPathRef";
-            this.Button_DatPathRef.Size = new System.Drawing.Size(37, 23);
-            this.Button_DatPathRef.TabIndex = 3;
-            this.Button_DatPathRef.Text = "参照";
-            this.Button_DatPathRef.UseVisualStyleBackColor = true;
-            // 
-            // CheckBox_Asf
-            // 
-            this.CheckBox_Asf.AutoSize = true;
-            this.CheckBox_Asf.Location = new System.Drawing.Point(10, 115);
-            this.CheckBox_Asf.Name = "CheckBox_Asf";
-            this.CheckBox_Asf.Size = new System.Drawing.Size(48, 16);
-            this.CheckBox_Asf.TabIndex = 5;
-            this.CheckBox_Asf.Text = "動画";
-            this.CheckBox_Asf.UseVisualStyleBackColor = true;
-            // 
-            // CheckBox_Dat
-            // 
-            this.CheckBox_Dat.AutoSize = true;
-            this.CheckBox_Dat.Location = new System.Drawing.Point(10, 12);
-            this.CheckBox_Dat.Name = "CheckBox_Dat";
-            this.CheckBox_Dat.Size = new System.Drawing.Size(47, 16);
-            this.CheckBox_Dat.TabIndex = 0;
-            this.CheckBox_Dat.Text = "DAT";
-            this.CheckBox_Dat.UseVisualStyleBackColor = true;
+            this.RadioButton_StartTimeNum.CheckedChanged += new System.EventHandler(this.RadioButton_StartTimeNum_CheckedChanged);
             // 
             // Tabpage_Haven
             // 
+            this.Tabpage_Haven.Controls.Add(this.DateTimePicker_LiveStartTime);
+            this.Tabpage_Haven.Controls.Add(this.Button_GetLiveStartTime);
+            this.Tabpage_Haven.Controls.Add(this.Label_LiveStartTime);
+            this.Tabpage_Haven.Controls.Add(this.GroupBox_DAT);
+            this.Tabpage_Haven.Controls.Add(this.Button1);
             this.Tabpage_Haven.Controls.Add(this.GroupBox1);
             this.Tabpage_Haven.Location = new System.Drawing.Point(4, 22);
             this.Tabpage_Haven.Name = "Tabpage_Haven";
             this.Tabpage_Haven.Padding = new System.Windows.Forms.Padding(3);
             this.Tabpage_Haven.Size = new System.Drawing.Size(483, 401);
             this.Tabpage_Haven.TabIndex = 2;
-            this.Tabpage_Haven.Text = "避難所";
+            this.Tabpage_Haven.Text = "DAT解析";
             this.Tabpage_Haven.UseVisualStyleBackColor = true;
             // 
             // GroupBox1
@@ -519,12 +398,12 @@
             this.GroupBox1.Controls.Add(this.Label4);
             this.GroupBox1.Controls.Add(this.Label5);
             this.GroupBox1.Controls.Add(this.Button_DatPathRef_Haven);
-            this.GroupBox1.Location = new System.Drawing.Point(12, 6);
+            this.GroupBox1.Location = new System.Drawing.Point(13, 105);
             this.GroupBox1.Name = "GroupBox1";
             this.GroupBox1.Size = new System.Drawing.Size(462, 71);
             this.GroupBox1.TabIndex = 1;
             this.GroupBox1.TabStop = false;
-            this.GroupBox1.Text = "datファイル";
+            this.GroupBox1.Text = "したらば";
             // 
             // TextBox_DatUseNumEnd_Haven
             // 
@@ -542,6 +421,8 @@
             this.TextBox_DatPath_Haven.Name = "TextBox_DatPath_Haven";
             this.TextBox_DatPath_Haven.Size = new System.Drawing.Size(327, 19);
             this.TextBox_DatPath_Haven.TabIndex = 1;
+            this.TextBox_DatPath_Haven.DragDrop += new System.Windows.Forms.DragEventHandler(this.TextBox_DatPath_Haven_DragDrop);
+            this.TextBox_DatPath_Haven.DragEnter += new System.Windows.Forms.DragEventHandler(this.TextBox_DatPath_Haven_DragEnter);
             // 
             // TextBox_DatUseNumStart_Haven
             // 
@@ -576,9 +457,9 @@
             this.Label5.Location = new System.Drawing.Point(12, 18);
             this.Label5.Margin = new System.Windows.Forms.Padding(3);
             this.Label5.Name = "Label5";
-            this.Label5.Size = new System.Drawing.Size(39, 12);
+            this.Label5.Size = new System.Drawing.Size(55, 12);
             this.Label5.TabIndex = 4;
-            this.Label5.Text = "ファイル";
+            this.Label5.Text = "datファイル";
             // 
             // Button_DatPathRef_Haven
             // 
@@ -644,26 +525,173 @@
             // 
             // Button1
             // 
-            this.Button1.Location = new System.Drawing.Point(381, 435);
+            this.Button1.Location = new System.Drawing.Point(376, 372);
             this.Button1.Name = "Button1";
             this.Button1.Size = new System.Drawing.Size(99, 23);
             this.Button1.TabIndex = 27;
             this.Button1.Text = "dat解析実行";
             this.Button1.UseVisualStyleBackColor = true;
+            this.Button1.Click += new System.EventHandler(this.Button1_Click);
+            // 
+            // GroupBox_DAT
+            // 
+            this.GroupBox_DAT.Controls.Add(this.TextBox_DatUseNumEnd);
+            this.GroupBox_DAT.Controls.Add(this.TextBox_DatPath);
+            this.GroupBox_DAT.Controls.Add(this.TextBox_DatUseNumStart);
+            this.GroupBox_DAT.Controls.Add(this.Label_DatUseNumExp);
+            this.GroupBox_DAT.Controls.Add(this.Label_DatUseNum);
+            this.GroupBox_DAT.Controls.Add(this.Label_DatPath);
+            this.GroupBox_DAT.Controls.Add(this.Button_DatPathRef);
+            this.GroupBox_DAT.Location = new System.Drawing.Point(14, 28);
+            this.GroupBox_DAT.Name = "GroupBox_DAT";
+            this.GroupBox_DAT.Size = new System.Drawing.Size(462, 71);
+            this.GroupBox_DAT.TabIndex = 3;
+            this.GroupBox_DAT.TabStop = false;
+            this.GroupBox_DAT.Text = "2ch";
+            // 
+            // TextBox_DatUseNumEnd
+            // 
+            this.TextBox_DatUseNumEnd.BackColor = System.Drawing.SystemColors.Window;
+            this.TextBox_DatUseNumEnd.Location = new System.Drawing.Point(143, 44);
+            this.TextBox_DatUseNumEnd.Name = "TextBox_DatUseNumEnd";
+            this.TextBox_DatUseNumEnd.Size = new System.Drawing.Size(31, 19);
+            this.TextBox_DatUseNumEnd.TabIndex = 8;
+            // 
+            // TextBox_DatPath
+            // 
+            this.TextBox_DatPath.AllowDrop = true;
+            this.TextBox_DatPath.BackColor = System.Drawing.SystemColors.Window;
+            this.TextBox_DatPath.Location = new System.Drawing.Point(76, 18);
+            this.TextBox_DatPath.Name = "TextBox_DatPath";
+            this.TextBox_DatPath.Size = new System.Drawing.Size(327, 19);
+            this.TextBox_DatPath.TabIndex = 1;
+            // 
+            // TextBox_DatUseNumStart
+            // 
+            this.TextBox_DatUseNumStart.BackColor = System.Drawing.SystemColors.Window;
+            this.TextBox_DatUseNumStart.Location = new System.Drawing.Point(76, 44);
+            this.TextBox_DatUseNumStart.Name = "TextBox_DatUseNumStart";
+            this.TextBox_DatUseNumStart.Size = new System.Drawing.Size(31, 19);
+            this.TextBox_DatUseNumStart.TabIndex = 4;
+            // 
+            // Label_DatUseNumExp
+            // 
+            this.Label_DatUseNumExp.AutoSize = true;
+            this.Label_DatUseNumExp.Location = new System.Drawing.Point(113, 48);
+            this.Label_DatUseNumExp.Name = "Label_DatUseNumExp";
+            this.Label_DatUseNumExp.Size = new System.Drawing.Size(23, 12);
+            this.Label_DatUseNumExp.TabIndex = 7;
+            this.Label_DatUseNumExp.Text = "から";
+            // 
+            // Label_DatUseNum
+            // 
+            this.Label_DatUseNum.AutoSize = true;
+            this.Label_DatUseNum.Location = new System.Drawing.Point(12, 46);
+            this.Label_DatUseNum.Margin = new System.Windows.Forms.Padding(3);
+            this.Label_DatUseNum.Name = "Label_DatUseNum";
+            this.Label_DatUseNum.Size = new System.Drawing.Size(47, 12);
+            this.Label_DatUseNum.TabIndex = 6;
+            this.Label_DatUseNum.Text = "レス番号";
+            // 
+            // Label_DatPath
+            // 
+            this.Label_DatPath.AutoSize = true;
+            this.Label_DatPath.Location = new System.Drawing.Point(12, 18);
+            this.Label_DatPath.Margin = new System.Windows.Forms.Padding(3);
+            this.Label_DatPath.Name = "Label_DatPath";
+            this.Label_DatPath.Size = new System.Drawing.Size(55, 12);
+            this.Label_DatPath.TabIndex = 4;
+            this.Label_DatPath.Text = "datファイル";
+            // 
+            // Button_DatPathRef
+            // 
+            this.Button_DatPathRef.Location = new System.Drawing.Point(410, 16);
+            this.Button_DatPathRef.Name = "Button_DatPathRef";
+            this.Button_DatPathRef.Size = new System.Drawing.Size(37, 23);
+            this.Button_DatPathRef.TabIndex = 3;
+            this.Button_DatPathRef.Text = "参照";
+            this.Button_DatPathRef.UseVisualStyleBackColor = true;
+            // 
+            // groupBox_ffmpeg
+            // 
+            this.groupBox_ffmpeg.Controls.Add(this.label6);
+            this.groupBox_ffmpeg.Controls.Add(this.TextBox_FFmpegPath);
+            this.groupBox_ffmpeg.Controls.Add(this.Button_FFmpegPath);
+            this.groupBox_ffmpeg.Location = new System.Drawing.Point(10, 7);
+            this.groupBox_ffmpeg.Name = "groupBox_ffmpeg";
+            this.groupBox_ffmpeg.Size = new System.Drawing.Size(465, 60);
+            this.groupBox_ffmpeg.TabIndex = 25;
+            this.groupBox_ffmpeg.TabStop = false;
+            this.groupBox_ffmpeg.Text = "FFMPEG";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(15, 21);
+            this.label6.Margin = new System.Windows.Forms.Padding(3);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(58, 12);
+            this.label6.TabIndex = 30;
+            this.label6.Text = "ファイルパス";
+            // 
+            // TextBox_FFmpegPath
+            // 
+            this.TextBox_FFmpegPath.AllowDrop = true;
+            this.TextBox_FFmpegPath.Location = new System.Drawing.Point(79, 18);
+            this.TextBox_FFmpegPath.Name = "TextBox_FFmpegPath";
+            this.TextBox_FFmpegPath.Size = new System.Drawing.Size(327, 19);
+            this.TextBox_FFmpegPath.TabIndex = 28;
+            this.TextBox_FFmpegPath.TextChanged += new System.EventHandler(this.TextBox_FFmpegPath_TextChanged);
+            this.TextBox_FFmpegPath.DragDrop += new System.Windows.Forms.DragEventHandler(this.TextBox_FFmpegPath_DragDrop);
+            this.TextBox_FFmpegPath.DragEnter += new System.Windows.Forms.DragEventHandler(this.TextBox_FFmpegPath_DragEnter);
+            // 
+            // Button_FFmpegPath
+            // 
+            this.Button_FFmpegPath.Location = new System.Drawing.Point(413, 17);
+            this.Button_FFmpegPath.Name = "Button_FFmpegPath";
+            this.Button_FFmpegPath.Size = new System.Drawing.Size(37, 23);
+            this.Button_FFmpegPath.TabIndex = 29;
+            this.Button_FFmpegPath.Text = "参照";
+            this.Button_FFmpegPath.UseVisualStyleBackColor = true;
+            // 
+            // Button_GetLiveStartTime
+            // 
+            this.Button_GetLiveStartTime.Location = new System.Drawing.Point(353, 189);
+            this.Button_GetLiveStartTime.Name = "Button_GetLiveStartTime";
+            this.Button_GetLiveStartTime.Size = new System.Drawing.Size(111, 23);
+            this.Button_GetLiveStartTime.TabIndex = 30;
+            this.Button_GetLiveStartTime.Text = "ファイル名から取得";
+            this.Button_GetLiveStartTime.UseVisualStyleBackColor = true;
+            // 
+            // Label_LiveStartTime
+            // 
+            this.Label_LiveStartTime.AutoSize = true;
+            this.Label_LiveStartTime.Location = new System.Drawing.Point(18, 194);
+            this.Label_LiveStartTime.Name = "Label_LiveStartTime";
+            this.Label_LiveStartTime.Size = new System.Drawing.Size(77, 12);
+            this.Label_LiveStartTime.TabIndex = 28;
+            this.Label_LiveStartTime.Text = "配信開始時刻";
+            // 
+            // DateTimePicker_LiveStartTime
+            // 
+            this.DateTimePicker_LiveStartTime.CustomFormat = "yyyy/MM/dd HH:mm:ss";
+            this.DateTimePicker_LiveStartTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.DateTimePicker_LiveStartTime.Location = new System.Drawing.Point(101, 191);
+            this.DateTimePicker_LiveStartTime.Name = "DateTimePicker_LiveStartTime";
+            this.DateTimePicker_LiveStartTime.Size = new System.Drawing.Size(246, 19);
+            this.DateTimePicker_LiveStartTime.TabIndex = 31;
             // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(493, 466);
+            this.ClientSize = new System.Drawing.Size(493, 339);
             this.Controls.Add(this.TabControl_Config);
-            this.Controls.Add(this.Button1);
             this.Name = "main";
-            this.Text = "Form1";
+            this.Text = "p2c";
             this.Load += new System.EventHandler(this.main_Load);
             this.TabControl_Config.ResumeLayout(false);
             this.TabPage_Config.ResumeLayout(false);
-            this.TabPage_Config.PerformLayout();
             this.GroupBox_Asf.ResumeLayout(false);
             this.GroupBox_Asf.PerformLayout();
             this.GroupBox_EndTime.ResumeLayout(false);
@@ -674,13 +702,16 @@
             this.GroupBox_Cover.PerformLayout();
             this.GroupBox_StartTime.ResumeLayout(false);
             this.GroupBox_StartTime.PerformLayout();
-            this.GroupBox_DAT.ResumeLayout(false);
-            this.GroupBox_DAT.PerformLayout();
             this.Tabpage_Haven.ResumeLayout(false);
+            this.Tabpage_Haven.PerformLayout();
             this.GroupBox1.ResumeLayout(false);
             this.GroupBox1.PerformLayout();
             this.TabPage_Log.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView_Log)).EndInit();
+            this.GroupBox_DAT.ResumeLayout(false);
+            this.GroupBox_DAT.PerformLayout();
+            this.groupBox_ffmpeg.ResumeLayout(false);
+            this.groupBox_ffmpeg.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -690,9 +721,6 @@
         internal System.Windows.Forms.TabControl TabControl_Config;
         internal System.Windows.Forms.TabPage TabPage_Config;
         internal System.Windows.Forms.GroupBox GroupBox_Asf;
-        internal System.Windows.Forms.Button Button_GetLiveStartTime;
-        internal System.Windows.Forms.TextBox TextBox_LiveStartTime;
-        internal System.Windows.Forms.Label Label_LiveStartTime;
         internal System.Windows.Forms.Label Label_AsfPath;
         internal System.Windows.Forms.Button Button_Exec;
         internal System.Windows.Forms.TextBox TextBox_AsfPath;
@@ -716,17 +744,6 @@
         internal System.Windows.Forms.TextBox TextBox_StartTimeSet;
         internal System.Windows.Forms.RadioButton RadioButton_StartTimeSet;
         internal System.Windows.Forms.RadioButton RadioButton_StartTimeNum;
-        internal System.Windows.Forms.GroupBox GroupBox_DAT;
-        internal System.Windows.Forms.CheckBox CheckBox_SetTime;
-        internal System.Windows.Forms.TextBox TextBox_DatUseNumEnd;
-        internal System.Windows.Forms.TextBox TextBox_DatPath;
-        internal System.Windows.Forms.TextBox TextBox_DatUseNumStart;
-        internal System.Windows.Forms.Label Label_DatUseNumExp;
-        internal System.Windows.Forms.Label Label_DatUseNum;
-        internal System.Windows.Forms.Label Label_DatPath;
-        internal System.Windows.Forms.Button Button_DatPathRef;
-        internal System.Windows.Forms.CheckBox CheckBox_Asf;
-        internal System.Windows.Forms.CheckBox CheckBox_Dat;
         internal System.Windows.Forms.TabPage Tabpage_Haven;
         internal System.Windows.Forms.GroupBox GroupBox1;
         internal System.Windows.Forms.TextBox TextBox_DatUseNumEnd_Haven;
@@ -744,6 +761,21 @@
         internal System.Windows.Forms.OpenFileDialog OpenFileDialog2;
         internal System.Windows.Forms.OpenFileDialog OpenFileDialog3;
         internal System.Windows.Forms.Button Button1;
+        internal System.Windows.Forms.GroupBox GroupBox_DAT;
+        internal System.Windows.Forms.TextBox TextBox_DatUseNumEnd;
+        internal System.Windows.Forms.TextBox TextBox_DatPath;
+        internal System.Windows.Forms.TextBox TextBox_DatUseNumStart;
+        internal System.Windows.Forms.Label Label_DatUseNumExp;
+        internal System.Windows.Forms.Label Label_DatUseNum;
+        internal System.Windows.Forms.Label Label_DatPath;
+        internal System.Windows.Forms.Button Button_DatPathRef;
+        private System.Windows.Forms.GroupBox groupBox_ffmpeg;
+        internal System.Windows.Forms.Label label6;
+        internal System.Windows.Forms.TextBox TextBox_FFmpegPath;
+        internal System.Windows.Forms.Button Button_FFmpegPath;
+        internal System.Windows.Forms.Button Button_GetLiveStartTime;
+        internal System.Windows.Forms.Label Label_LiveStartTime;
+        private System.Windows.Forms.DateTimePicker DateTimePicker_LiveStartTime;
     }
 }
 

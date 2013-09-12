@@ -11,10 +11,11 @@ namespace p2c_cs
 {
     public partial class view : Form
     {
+        public Form parent;
+
         public view()
         {
             InitializeComponent();
-            Load += view_Load;
         }
 
         private void DataGridView1_CellContentClick(System.Object sender, System.Windows.Forms.DataGridViewCellEventArgs e)
@@ -602,6 +603,11 @@ namespace p2c_cs
             }
         }
 
+        private void view_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.parent.Close();
+        }
+
     }
 
     //Public Class CStudent
@@ -751,6 +757,20 @@ namespace p2c_cs
     //行コピー機能が必要？
     //ソース直修モードもほしい
 
+    //TODO
+    //・したらば対応
+    //・dat自動取得
+    //・
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
     //
     //
     //

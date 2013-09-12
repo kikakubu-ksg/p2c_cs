@@ -2,14 +2,11 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="p2c_cs.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="ASF_Check" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
     <Setting Name="ASF_CoverRadio" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="ASF_CoverSec" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="ASF_CoverSec" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5</Value>
     </Setting>
     <Setting Name="ASF_EndTimeRadio" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
@@ -26,10 +23,10 @@
     <Setting Name="ASF_StartTimeRadio" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="DAT_Check" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
     <Setting Name="FFMPEG_EXEC" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ASF_FILE" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>

@@ -59,6 +59,7 @@
             this.Button_EX3.TabIndex = 36;
             this.Button_EX3.Text = "Ex3";
             this.Button_EX3.UseVisualStyleBackColor = false;
+            this.Button_EX3.Click += new System.EventHandler(this.Button_EX3_Click);
             // 
             // Button_EX2
             // 
@@ -69,6 +70,7 @@
             this.Button_EX2.TabIndex = 35;
             this.Button_EX2.Text = "Ex2";
             this.Button_EX2.UseVisualStyleBackColor = false;
+            this.Button_EX2.Click += new System.EventHandler(this.Button_EX2_Click);
             // 
             // Button_EX1
             // 
@@ -79,6 +81,7 @@
             this.Button_EX1.TabIndex = 34;
             this.Button_EX1.Text = "Ex1";
             this.Button_EX1.UseVisualStyleBackColor = false;
+            this.Button_EX1.Click += new System.EventHandler(this.Button_EX1_Click);
             // 
             // Button_Normal
             // 
@@ -89,6 +92,7 @@
             this.Button_Normal.TabIndex = 33;
             this.Button_Normal.Text = "Normal";
             this.Button_Normal.UseVisualStyleBackColor = false;
+            this.Button_Normal.Click += new System.EventHandler(this.Button_Normal_Click);
             // 
             // Label_Decorate
             // 
@@ -123,6 +127,7 @@
             this.NextImageAll.TabIndex = 29;
             this.NextImageAll.Text = "全部次の画像";
             this.NextImageAll.UseVisualStyleBackColor = true;
+            this.NextImageAll.Click += new System.EventHandler(this.NextImageAll_Click);
             // 
             // PreviousImageAll
             // 
@@ -132,6 +137,7 @@
             this.PreviousImageAll.TabIndex = 28;
             this.PreviousImageAll.Text = "全部前の画像";
             this.PreviousImageAll.UseVisualStyleBackColor = true;
+            this.PreviousImageAll.Click += new System.EventHandler(this.PreviousImageAll_Click);
             // 
             // MessageSpace
             // 
@@ -150,6 +156,7 @@
             this.NextImage.TabIndex = 26;
             this.NextImage.Text = "次の画像";
             this.NextImage.UseVisualStyleBackColor = true;
+            this.NextImage.Click += new System.EventHandler(this.NextImage_Click);
             // 
             // Column1
             // 
@@ -164,6 +171,7 @@
             this.PreviousImage.TabIndex = 25;
             this.PreviousImage.Text = "前の画像";
             this.PreviousImage.UseVisualStyleBackColor = true;
+            this.PreviousImage.Click += new System.EventHandler(this.PreviousImage_Click);
             // 
             // LeftButton
             // 
@@ -172,6 +180,8 @@
             this.LeftButton.Size = new System.Drawing.Size(27, 23);
             this.LeftButton.TabIndex = 24;
             this.LeftButton.UseVisualStyleBackColor = true;
+            this.LeftButton.Click += new System.EventHandler(this.RightButton_Click);
+            this.LeftButton.Paint += new System.Windows.Forms.PaintEventHandler(this.RightButton_Paint);
             // 
             // RightButton
             // 
@@ -180,6 +190,8 @@
             this.RightButton.Size = new System.Drawing.Size(27, 24);
             this.RightButton.TabIndex = 23;
             this.RightButton.UseVisualStyleBackColor = true;
+            this.RightButton.Click += new System.EventHandler(this.LeftButton_Click);
+            this.RightButton.Paint += new System.Windows.Forms.PaintEventHandler(this.LeftButton_Paint);
             // 
             // htmloutput
             // 
@@ -199,6 +211,7 @@
             this.DownButton.TabIndex = 21;
             this.DownButton.Text = "▼";
             this.DownButton.UseVisualStyleBackColor = true;
+            this.DownButton.Click += new System.EventHandler(this.DownButton_Click);
             // 
             // UpButton
             // 
@@ -208,6 +221,7 @@
             this.UpButton.TabIndex = 20;
             this.UpButton.Text = "▲";
             this.UpButton.UseVisualStyleBackColor = true;
+            this.UpButton.Click += new System.EventHandler(this.UpButton_Click);
             // 
             // DataGridView1
             // 
@@ -223,6 +237,8 @@
             this.DataGridView1.RowTemplate.Height = 21;
             this.DataGridView1.Size = new System.Drawing.Size(996, 575);
             this.DataGridView1.TabIndex = 19;
+            this.DataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_CellContentClick);
+            this.DataGridView1.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.DataGridView1_CellPainting);
             // 
             // view
             // 
@@ -249,6 +265,8 @@
             this.Controls.Add(this.DataGridView1);
             this.Name = "view";
             this.Text = "view";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.view_FormClosed);
+            this.Load += new System.EventHandler(this.view_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
