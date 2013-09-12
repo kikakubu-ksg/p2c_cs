@@ -11,12 +11,17 @@ namespace p2c_cs
 {
     public partial class view : Form
     {
+        public view()
+        {
+            InitializeComponent();
+            Load += view_Load;
+        }
 
         private void DataGridView1_CellContentClick(System.Object sender, System.Windows.Forms.DataGridViewCellEventArgs e)
         {
             DataGridView dgv = (DataGridView)sender;
             //"Button"列ならば、ボタンがクリックされた
-            if (dgv.Columns(e.ColumnIndex).Name == "Button")
+            if (dgv.Columns[(int)e.ColumnIndex].Name == "Button")
             {
                 //一行上に移動
                 if (e.RowIndex == 0)
@@ -30,20 +35,20 @@ namespace p2c_cs
                 var _with1 = item1;
                 for (int i = 0; i <= _with1.Cells.Count - 1; i++)
                 {
-                    _with1.Cells(i).Value = dgv.Rows(e.RowIndex).Cells(i).Value;
+                    _with1.Cells[i].Value = dgv.Rows[(int)e.RowIndex].Cells[i].Value;
                 }
 
 
 
                 dgv.Rows.Insert(e.RowIndex - 1, item1);
-                dgv.Rows.Remove(dgv.Rows(e.RowIndex + 1));
+                dgv.Rows.Remove(dgv.Rows[e.RowIndex + 1]);
 
 
                 //MessageBox.Show((e.RowIndex.ToString() + _
                 //    "行のボタンがクリックされました。"))
             }
 
-            if (dgv.Columns(e.ColumnIndex).Name == "Button2")
+            if (dgv.Columns[e.ColumnIndex].Name == "Button2")
             {
                 //一行下に移動
                 if (e.RowIndex >= dgv.Rows.Count - 2)
@@ -56,12 +61,12 @@ namespace p2c_cs
                 var _with2 = item1;
                 for (int i = 0; i <= _with2.Cells.Count - 1; i++)
                 {
-                    _with2.Cells(i).Value = dgv.Rows(e.RowIndex).Cells(i).Value;
+                    _with2.Cells[i].Value = dgv.Rows[e.RowIndex].Cells[i].Value;
                 }
 
 
                 dgv.Rows.Insert(e.RowIndex + 2, item1);
-                dgv.Rows.Remove(dgv.Rows(e.RowIndex));
+                dgv.Rows.Remove(dgv.Rows[e.RowIndex]);
 
             }
 
@@ -78,7 +83,7 @@ namespace p2c_cs
             //     DataGridView1.DataSource = students
 
             //---add columns to the DataGridView control---
-            DataGridView1.Columns(RowType.ResNum).HeaderText = "レス番";
+            DataGridView1.Columns[(int)common.RowType.ResNum].HeaderText = "レス番";
             //DataGridView1.Columns.Add("ID", "ID")
             //DataGridViewImageColumnの作成
             DataGridViewImageColumn column = new DataGridViewImageColumn();
@@ -122,12 +127,12 @@ namespace p2c_cs
             DataGridView1.Columns.Add("h7", "予備２");
             DataGridView1.Columns.Add("h8", "予備３");
 
-            DataGridView1.Columns(RowType.ResNum).Width = 20;
-            DataGridView1.Columns(RowType.Image).Width = 200;
-            DataGridView1.Columns(RowType.ImageAdopt).Width = 20;
-            DataGridView1.Columns(RowType.Comment).Width = 200;
-            DataGridView1.Columns(RowType.Res).Width = 200;
-            DataGridView1.Columns(RowType.ResAdopt).Width = 20;
+            DataGridView1.Columns[(int)common.RowType.ResNum].Width = 20;
+            DataGridView1.Columns[(int)common.RowType.Image].Width = 200;
+            DataGridView1.Columns[(int)common.RowType.ImageAdopt].Width = 20;
+            DataGridView1.Columns[(int)common.RowType.Comment].Width = 200;
+            DataGridView1.Columns[(int)common.RowType.Res].Width = 200;
+            DataGridView1.Columns[(int)common.RowType.ResAdopt].Width = 20;
 
 
 
@@ -299,14 +304,14 @@ namespace p2c_cs
             var _with3 = item1;
             for (int i = 0; i <= _with3.Cells.Count - 1; i++)
             {
-                _with3.Cells(i).Value = dgv.Rows(cel.RowIndex).Cells(i).Value;
+                _with3.Cells[i].Value = dgv.Rows[cel.RowIndex].Cells[i].Value;
             }
 
             dgv.Rows.Insert(cel.RowIndex - 1, item1);
-            dgv.Rows.Remove(dgv.Rows(cel.RowIndex));
+            dgv.Rows.Remove(dgv.Rows[cel.RowIndex]);
 
             dgv.ClearSelection();
-            dgv.CurrentCell = DataGridView1(dgv.CurrentCell.ColumnIndex, dgv.CurrentCell.RowIndex - 2);
+            dgv.CurrentCell = DataGridView1[dgv.CurrentCell.ColumnIndex, dgv.CurrentCell.RowIndex - 2];
 
         }
 
@@ -338,14 +343,14 @@ namespace p2c_cs
             var _with4 = item1;
             for (int i = 0; i <= _with4.Cells.Count - 1; i++)
             {
-                _with4.Cells(i).Value = dgv.Rows(cel.RowIndex).Cells(i).Value;
+                _with4.Cells[i].Value = dgv.Rows[cel.RowIndex].Cells[i].Value;
             }
 
             dgv.Rows.Insert(cel.RowIndex + 2, item1);
-            dgv.Rows.Remove(dgv.Rows(cel.RowIndex));
+            dgv.Rows.Remove(dgv.Rows[cel.RowIndex]);
 
             dgv.ClearSelection();
-            dgv.CurrentCell = DataGridView1(dgv.CurrentCell.ColumnIndex, dgv.CurrentCell.RowIndex + 1);
+            dgv.CurrentCell = DataGridView1[dgv.CurrentCell.ColumnIndex, dgv.CurrentCell.RowIndex + 1];
         }
 
 
@@ -356,12 +361,12 @@ namespace p2c_cs
             DataGridView dgv = DataGridView1;
             try
             {
-                DataGridViewCell dgvc = dgv.SelectedCells.Item(0);
+                DataGridViewCell dgvc = dgv.SelectedCells[0];
                 dgv.Rows.Insert(dgvc.RowIndex, 1);
             }
             catch (SystemException ex)
             {
-                MessageBox.Show("行を追加できません。" + Constants.vbCrLf + ex.Message);
+                MessageBox.Show("行を追加できません。\r\n" + ex.Message);
             }
 
 
@@ -389,12 +394,12 @@ namespace p2c_cs
             DataGridView dgv = DataGridView1;
             try
             {
-                DataGridViewCell dgvc = dgv.SelectedCells.Item(0);
+                DataGridViewCell dgvc = dgv.SelectedCells[0];
                 dgv.Rows.RemoveAt(dgvc.RowIndex);
             }
             catch (SystemException ex)
             {
-                MessageBox.Show("行を削除できません。" + Constants.vbCrLf + ex.Message);
+                MessageBox.Show("行を削除できません。\r\n" + ex.Message);
             }
 
         }
@@ -420,25 +425,25 @@ namespace p2c_cs
             DataGridViewCell dgvc = default(DataGridViewCell);
             try
             {
-                dgvc = dgv.SelectedCells.Item(0);
+                dgvc = dgv.SelectedCells[0];
             }
             catch (SystemException ex)
             {
-                MessageBox.Show("行がありません。" + Constants.vbCrLf + ex.Message);
+                MessageBox.Show("行がありません。\r\n" + ex.Message);
                 return;
             }
-            string currentStr = dgv(RowType.ImageName, dgvc.RowIndex).Value;
+            string currentStr = (string)dgv[(int)common.RowType.ImageName, dgvc.RowIndex].Value;
 
-            Singleton singleton = singleton.GetInstance();
-            string pi = singleton.GetPreviousImage(GetExeAppPath() + "\\tmp\\" + currentStr);
+            Singleton singleton = Singleton.GetInstance();
+            string pi = singleton.GetPreviousImage(common.GetExeAppPath() + "\\tmp\\" + currentStr);
 
             if (pi == null)
                 return;
 
             //画像変更
-            dgv(RowType.Image, dgvc.RowIndex).Value = new Bitmap(pi);
+            dgv[(int)common.RowType.Image, dgvc.RowIndex].Value = new Bitmap(pi);
             //ファイル名変更
-            dgv(RowType.ImageName, dgvc.RowIndex).Value = pi.Replace(GetExeAppPath() + "\\tmp\\", "");
+            dgv[(int)common.RowType.ImageName, dgvc.RowIndex].Value = pi.Replace(common.GetExeAppPath() + "\\tmp\\", "");
 
         }
 
@@ -449,25 +454,25 @@ namespace p2c_cs
             DataGridViewCell dgvc = default(DataGridViewCell);
             try
             {
-                dgvc = dgv.SelectedCells.Item(0);
+                dgvc = dgv.SelectedCells[0];
             }
             catch (SystemException ex)
             {
-                MessageBox.Show("行がありません。" + Constants.vbCrLf + ex.Message);
+                MessageBox.Show("行がありません。\r\n" + ex.Message);
                 return;
             }
-            string currentStr = dgv(RowType.ImageName, dgvc.RowIndex).Value;
+            string currentStr = (string)dgv[(int)common.RowType.ImageName, dgvc.RowIndex].Value;
 
-            Singleton singleton = singleton.GetInstance();
-            string pi = singleton.GetNextImage(GetExeAppPath() + "\\tmp\\" + currentStr);
+            Singleton singleton = Singleton.GetInstance();
+            string pi = singleton.GetNextImage(common.GetExeAppPath() + "\\tmp\\" + currentStr);
 
             if (pi == null)
                 return;
 
             //画像変更
-            dgv(RowType.Image, dgvc.RowIndex).Value = new Bitmap(pi);
+            dgv[(int)common.RowType.Image, dgvc.RowIndex].Value = new Bitmap(pi);
             //ファイル名変更
-            dgv(RowType.ImageName, dgvc.RowIndex).Value = pi.Replace(GetExeAppPath() + "\\tmp\\", "");
+            dgv[(int)common.RowType.ImageName, dgvc.RowIndex].Value = pi.Replace(common.GetExeAppPath() + "\\tmp\\", "");
         }
 
 
@@ -479,44 +484,44 @@ namespace p2c_cs
             ///をとる
             imageDir = System.Text.RegularExpressions.Regex.Replace(imageDir, "/$", "");
             //画像クリア
-            foreach (string tempFile in System.IO.Directory.GetFiles(GetExeAppPath() + "\\htmlimg"))
+            foreach (string tempFile in System.IO.Directory.GetFiles(common.GetExeAppPath() + "\\htmlimg"))
             {
                 System.IO.File.Delete(tempFile);
             }
             foreach (DataGridViewRow dgvr in DataGridView1.Rows)
             {
                 string comClass = "<DIV class='_comment_no_image";
-                if (dgvr.Cells.Item(RowType.ImageAdopt).Value == true)
+                if ((bool)dgvr.Cells[(int)common.RowType.ImageAdopt].Value)
                 {
                     //ファイルコピー
-                    System.IO.File.Copy(GetExeAppPath() + "\\tmp\\" + dgvr.Cells.Item(RowType.ImageName).Value, GetExeAppPath() + "\\htmlimg\\" + dgvr.Cells.Item(RowType.ImageName).Value, true);
+                    System.IO.File.Copy(common.GetExeAppPath() + "\\tmp\\" + dgvr.Cells[(int)common.RowType.ImageName].Value, common.GetExeAppPath() + "\\htmlimg\\" + dgvr.Cells[(int)common.RowType.ImageName].Value, true);
                     //image
-                    sb.Append("<DIV class='_image'><IMG SRC='").Append(imageDir).Append("/").Append(dgvr.Cells.Item(RowType.ImageName).Value).Append("' /></DIV>").Append(Constants.vbCrLf);
+                    sb.Append("<DIV class='_image'><IMG SRC='").Append(imageDir).Append("/").Append(dgvr.Cells[(int)common.RowType.ImageName].Value).Append("' /></DIV>").Append("\r\n");
                     comClass = "<DIV class='_comment_with_image";
                 }
                 //comment
-                if (!string.IsNullOrEmpty(dgvr.Cells.Item(RowType.Comment).Value))
+                if (!string.IsNullOrEmpty((string)dgvr.Cells[(int)common.RowType.Comment].Value))
                 {
-                    sb.Append(comClass).Append(" " + dgvr.Cells.Item(RowType.Comment).Tag + "'>").Append(dgvr.Cells.Item(RowType.Comment).Value).Append("</DIV>").Append(Constants.vbCrLf);
+                    sb.Append(comClass).Append(" " + dgvr.Cells[(int)common.RowType.Comment].Tag + "'>").Append(dgvr.Cells[(int)common.RowType.Comment].Value).Append("</DIV>").Append("\r\n");
                 }
-                if (dgvr.Cells.Item(RowType.ResAdopt).Value == true)
+                if ((bool)dgvr.Cells[(int)common.RowType.ResAdopt].Value)
                 {
                     //ress
-                    sb.Append("<DIV class='_reshead'><span class='_resnum " + dgvr.Cells.Item(RowType.ResNum).Tag + "'>").Append((RowType.HavenCode == 1 ? "<span class='_havenmark'>避</span>" : "")).Append(dgvr.Cells.Item(RowType.ResNum).Value).Append("</span>").Append("<span class='_name " + dgvr.Cells.Item(RowType.Name).Tag + "'>").Append(dgvr.Cells.Item(RowType.Name).Value).Append("</span>").Append("<span class='_dateid " + dgvr.Cells.Item(RowType.DateId).Tag + "'>").Append(dgvr.Cells.Item(RowType.DateId).Value).Append("</span>").Append("</DIV>").Append(Constants.vbCrLf);
-                    string t = dgvr.Cells.Item(RowType.ResRaw).Value;
-                    sb.Append("<DIV class='_res " + dgvr.Cells.Item(RowType.ResRaw).Tag + "'>").Append(t.Replace(Constants.vbCrLf, "<br />")).Append("</DIV>").Append(Constants.vbCrLf);
+                    sb.Append("<DIV class='_reshead'><span class='_resnum " + dgvr.Cells[(int)common.RowType.ResNum].Tag + "'>").Append(((int)common.RowType.HavenCode == 1 ? "<span class='_havenmark'>避</span>" : "")).Append(dgvr.Cells[(int)common.RowType.ResNum].Value).Append("</span>").Append("<span class='_name " + dgvr.Cells[(int)common.RowType.Name].Tag + "'>").Append(dgvr.Cells[(int)common.RowType.Name].Value).Append("</span>").Append("<span class='_dateid " + dgvr.Cells[(int)common.RowType.DateId].Tag + "'>").Append(dgvr.Cells[(int)common.RowType.DateId].Value).Append("</span>").Append("</DIV>").Append("\r\n");
+                    string t = (string)dgvr.Cells[(int)common.RowType.ResRaw].Value;
+                    sb.Append("<DIV class='_res " + dgvr.Cells[(int)common.RowType.ResRaw].Tag + "'>").Append(t.Replace("\r\n", "<br />")).Append("</DIV>").Append("\r\n");
                 }
 
             }
 
             //テキスト出力
-            System.IO.StreamWriter sw = new System.IO.StreamWriter(GetExeAppPath() + "\\hoge.html", false, System.Text.Encoding.GetEncoding("utf-8"));
+            System.IO.StreamWriter sw = new System.IO.StreamWriter(common.GetExeAppPath() + "\\hoge.html", false, System.Text.Encoding.GetEncoding("utf-8"));
             sw.Write(sb.ToString());
             //閉じる
             sw.Close();
 
             //htmlを開く
-            System.Diagnostics.Process.Start(GetExeAppPath() + "\\hoge.html");
+            System.Diagnostics.Process.Start(common.GetExeAppPath() + "\\hoge.html");
 
         }
 
@@ -525,17 +530,17 @@ namespace p2c_cs
             DataGridView dgv = DataGridView1;
             foreach (DataGridViewRow dgvr in dgv.Rows)
             {
-                string currentStr = dgv(common.RowType.ImageName, dgvr.Index).Value;
+                string currentStr = (string)dgv[(int)common.RowType.ImageName, dgvr.Index].Value;
 
-                Singleton singleton = singleton.GetInstance();
-                string pi = singleton.GetPreviousImage(GetExeAppPath() + "\\tmp\\" + currentStr);
+                Singleton singleton = Singleton.GetInstance();
+                string pi = singleton.GetPreviousImage(common.GetExeAppPath() + "\\tmp\\" + currentStr);
 
                 if ((pi != null))
                 {
                     //画像変更
-                    dgv(RowType.Image, dgvr.Index).Value = new Bitmap(pi);
+                    dgv[(int)common.RowType.Image, dgvr.Index].Value = new Bitmap(pi);
                     //ファイル名変更
-                    dgv(RowType.ImageName, dgvr.Index).Value = pi.Replace(GetExeAppPath() + "\\tmp\\", "");
+                    dgv[(int)common.RowType.ImageName, dgvr.Index].Value = pi.Replace(common.GetExeAppPath() + "\\tmp\\", "");
                 }
             }
         }
@@ -545,17 +550,17 @@ namespace p2c_cs
             DataGridView dgv = DataGridView1;
             foreach (DataGridViewRow dgvr in dgv.Rows)
             {
-                string currentStr = dgv(RowType.ImageName, dgvr.Index).Value;
+                string currentStr = (string)dgv[(int)common.RowType.ImageName, dgvr.Index].Value;
 
-                Singleton singleton = singleton.GetInstance();
-                string pi = singleton.GetNextImage(GetExeAppPath() + "\\tmp\\" + currentStr);
+                Singleton singleton = Singleton.GetInstance();
+                string pi = singleton.GetNextImage(common.GetExeAppPath() + "\\tmp\\" + currentStr);
 
                 if ((pi != null))
                 {
                     //画像変更
-                    dgv(RowType.Image, dgvr.Index).Value = new Bitmap(pi);
+                    dgv[(int)common.RowType.Image, dgvr.Index].Value = new Bitmap(pi);
                     //ファイル名変更
-                    dgv(RowType.ImageName, dgvr.Index).Value = pi.Replace(GetExeAppPath() + "\\tmp\\", "");
+                    dgv[(int)common.RowType.ImageName, dgvr.Index].Value = pi.Replace(common.GetExeAppPath() + "\\tmp\\", "");
                 }
             }
         }
@@ -595,10 +600,6 @@ namespace p2c_cs
                 c.Tag = "ex3";
                 c.Style.BackColor = Color.Yellow;
             }
-        }
-        public view()
-        {
-            Load += view_Load;
         }
 
     }
@@ -662,7 +663,7 @@ namespace p2c_cs
         DataGridViewPaintParts paintParts)
         {
             base.Paint(graphics, clipBounds, cellBounds, rowIndex, cellState, value, formattedValue, errorText, cellStyle, advancedBorderStyle,
-            paintParts & !DataGridViewPaintParts.ContentBackground);
+            paintParts & ~DataGridViewPaintParts.ContentBackground);
         }
 
     }
@@ -678,7 +679,7 @@ namespace p2c_cs
         {
             Console.WriteLine("インスタンスを生成しました。");
             //ファイル配列取得
-            files = System.IO.Directory.GetFiles(GetExeAppPath() + "\\tmp", "*");
+            files = System.IO.Directory.GetFiles(common.GetExeAppPath() + "\\tmp", "*");
             //ソート
             Array.Sort(files);
         }
@@ -737,7 +738,7 @@ namespace p2c_cs
             _singleton = new Singleton();
             Console.WriteLine("インスタンスを生成しました。");
             //ファイル配列取得
-            _singleton.files = System.IO.Directory.GetFiles(GetExeAppPath() + "\\tmp", "*");
+            _singleton.files = System.IO.Directory.GetFiles(common.GetExeAppPath() + "\\tmp", "*");
             //ソート
             Array.Sort(_singleton.files);
             return _singleton;

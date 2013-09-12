@@ -187,6 +187,7 @@
             this.Button_Exec.TabIndex = 24;
             this.Button_Exec.Text = "画像抽出実行";
             this.Button_Exec.UseVisualStyleBackColor = true;
+            this.Button_Exec.Click += new System.EventHandler(this.Button_Exec_Click);
             // 
             // TextBox_AsfPath
             // 
@@ -659,6 +660,7 @@
             this.Controls.Add(this.Button1);
             this.Name = "main";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.main_Load);
             this.TabControl_Config.ResumeLayout(false);
             this.TabPage_Config.ResumeLayout(false);
             this.TabPage_Config.PerformLayout();

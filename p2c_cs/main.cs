@@ -10,7 +10,7 @@ using System.Diagnostics;
 
 namespace p2c_cs
 {
-    public class main : Form
+    public partial class main : Form
     {
 
 
@@ -18,6 +18,10 @@ namespace p2c_cs
         //編集フォーム
 
         public view Form = new view();
+        public main()
+        {
+            InitializeComponent();
+        }
         private void main_Load(System.Object sender, System.EventArgs e)
         {
             //初期化
@@ -300,54 +304,54 @@ namespace p2c_cs
 
         private void TextBox_DatPath_DragDrop(object sender, System.Windows.Forms.DragEventArgs e)
         {
-            FileDragDrop(sender, ref e);
+            FileDragDrop(sender, e);
         }
 
         private void TextBox_DatPath_DragEnter(object sender, System.Windows.Forms.DragEventArgs e)
         {
-            FileDragEnter(ref e);
+            FileDragEnter(sender, e);
         }
 
         private void TextBox_AsfPath_DragDrop(object sender, System.Windows.Forms.DragEventArgs e)
         {
-            FileDragDrop(sender, ref e);
+            FileDragDrop(sender, e);
         }
 
         private void TextBox_AsfPath_DragEnter(object sender, System.Windows.Forms.DragEventArgs e)
         {
-            FileDragEnter(ref e);
+            FileDragEnter(sender, e);
         }
         private void TextBox_OutputTempPath_DragDrop(object sender, System.Windows.Forms.DragEventArgs e)
         {
-            FileDragDrop(sender, ref e);
+            FileDragDrop(sender, e);
         }
 
         private void TextBox_OutputTempPath_DragEnter(object sender, System.Windows.Forms.DragEventArgs e)
         {
-            FileDragEnter(ref e);
+            FileDragEnter(sender, e);
         }
 
-        public void FileDragDrop(object sender, ref System.EventArgs e)
+        public void FileDragDrop(object sender,
+          System.Windows.Forms.DragEventArgs e)
         {
-            System.Windows.Forms.DragEventArgs ev = (DragEventArgs)e;
-            string[] fileName = Convert.ToString(ev.Data.GetData(DataFormats.FileDrop, false));
+            //コントロール内にドロップされたとき実行される
+            //ドロップされたすべてのファイル名を取得する
+            string[] fileName =
+                (string[])e.Data.GetData(DataFormats.FileDrop, false);
             TextBox tb = (TextBox)sender;
-            tb.Text = fileName[0];
+            tb.Text = fileName[1];
         }
 
-        public void FileDragEnter(ref System.EventArgs e)
+        public void FileDragEnter(object sender,
+            System.Windows.Forms.DragEventArgs e)
         {
-            System.Windows.Forms.DragEventArgs ev = (DragEventArgs)e;
-            if (ev.Data.GetDataPresent(DataFormats.FileDrop))
-            {
+            //コントロール内にドラッグされたとき実行される
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
                 //ドラッグされたデータ形式を調べ、ファイルのときはコピーとする
-                ev.Effect = DragDropEffects.Copy;
-            }
+                e.Effect = DragDropEffects.Copy;
             else
-            {
                 //ファイル以外は受け付けない
-                ev.Effect = DragDropEffects.None;
-            }
+                e.Effect = DragDropEffects.None;
         }
 
         private void Button_Exec_Click(System.Object sender, System.EventArgs e)
@@ -366,7 +370,7 @@ namespace p2c_cs
                 i = 1;
             }
             //画像クリア
-            foreach (string tempFile in System.IO.Directory.GetFiles(GetExeAppPath() + "\\tmp"))
+            foreach (string tempFile in System.IO.Directory.GetFiles(common.GetExeAppPath() + "\\tmp"))
             {
                 System.IO.File.Delete(tempFile);
             }
@@ -426,7 +430,7 @@ namespace p2c_cs
                         break; // TODO: might not be correct. Was : Exit While
                     }
 
-                    string[] stArrayData = Strings.Split(stBuffer, "<>", -1, CompareMethod.Binary);
+                    string[] stArrayData = stBuffer.Split(new string[] { "<>" }, StringSplitOptions.None);
                     Response res = new Response();
                     res.name = stArrayData[0];
                     res.mail = stArrayData[1];
@@ -493,7 +497,7 @@ namespace p2c_cs
                     }
                 }
             }
-            catch (Exception ex)
+            catch 
             {
                 MessageBox.Show("避難所dat読み込みでエラーが発生しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -623,14 +627,15 @@ namespace p2c_cs
 
         //並び替える方法を定義するクラス
         //IComparerインターフェイスを実装する
-        public class ResponseComparer : System.Collections.IComparer
+        public class ResponseComparer : System.Collections.IComparer,
+            System.Collections.Generic.IComparer<Response>
         {
 
             //xがyより小さいときはマイナスの数、大きいときはプラスの数、同じときは0を返す
             public int Compare(object x, object y)
             {
 
-                //Nothingが最も小さいとする
+                //nullが最も小さいとする
                 if (x == null && y == null)
                 {
                     return 0;
@@ -644,7 +649,7 @@ namespace p2c_cs
                     return 1;
                 }
 
-                //String型以外の比較はエラー
+                //Response型以外の比較はエラー
                 if (!(x is Response))
                 {
                     throw new ArgumentException("Response型でなければなりません。", "x");
@@ -659,10 +664,27 @@ namespace p2c_cs
                 //または、次のようにもできる
                 //Return DirectCast(x, String).Length - DirectCast(y, String).Length
             }
-        }
-        public main()
-        {
-            Load += main_Load;
+
+            //xがyより小さいときはマイナスの数、大きいときはプラスの数、同じときは0を返す
+            public int Compare(Response x, Response y)
+            {
+                //nullが最も小さいとする
+                if (x == null && y == null)
+                {
+                    return 0;
+                }
+                if (x == null)
+                {
+                    return -1;
+                }
+                if (y == null)
+                {
+                    return 1;
+                }
+
+                //文字列の長さを比較する
+                return ((Response)x).datetime.CompareTo(((Response)y).datetime);
+            }
         }
 
     }
@@ -670,142 +692,6 @@ namespace p2c_cs
 
     //Base Design
     //機能設計
-    //Form初期化
-
-
-    //○XML読み込み／設定処理→My.settingsを使う 済
-    //・XMLファイルから保存してある設定値を読み込む
-    //・値をmainに適用
-    //
-
-    //○main初期化 済
-    //・Const値設定
-    //・ログテーブル初期化 済
-    //
-    //
-    //画面機能
-    //○DATチェックボックス選択時処理 済
-    //DATボックス選択時（オフ）デフォルトはオン
-    //・DATパネル要素をすべて非アクティブにする
-    //・PEGチェックがオフの場合、実行ボタンを非アクティブにする
-    //
-    //DATボックス選択時（オン） 済
-    //・DATパネル要素をすべてアクティブにする
-    //・実行ボタンをアクティブにする
-    //
-    //○DATパス入力処理 済
-    //・参照ボタン押下時、OpenFileDialogを開いて選択
-    //・バリデーションはなし。
-    //
-    //○DATナンバー入力時処理 済
-    //・バリデーション。数値、-,以外は不許可
-    //
-    //
-
-    //○PEGチェックボックス選択時処理 済
-    //PEGボックス選択時（オフ）デフォルトはオン
-    //・PEGパネル要素をすべて非アクティブにする
-    //・DATチェックがオフの場合、実行ボタンを非アクティブにする
-    //
-    //PEGボックス選択時（オン） 済
-    //・PEGパネル要素をすべてアクティブにする
-    //・実行ボタンをアクティブにする
-    //
-    //○ASFパス入力処理 済
-    //・参照ボタン押下時、OpenFileDialogを開いて選択
-    //・バリデーションはなし。
-
-    //○StartTimeラジオボタン処理　デフォルトは上 済
-    //・選択時、対応項目をアクティブ化。もう一方を非アクティブ化
-    //
-    //○StartTime入力時処理 済
-    //・レス番号入力時バリデーション。数値のみ 済
-    //・時刻入力時バリデーション。yyyy-mm-dd hh:mm:ss の形式にフォーマッティング。 済
-    //
-
-    //
-    //○EndTimeラジオボタン処理　デフォルトは上 済
-    //・選択時、対応項目をアクティブ化。もう一方を非アクティブ化 済
-
-    //○EndTime入力時処理 済
-    //・時刻入力時バリデーション。yyyy-mm-dd hh:mm:ss の形式にフォーマッティング。 済
-    //
-
-    //○Imageラジオボタン処理　デフォルトは上 済
-    //・選択時、対応項目をアクティブ化。もう一方を非アクティブ化 済
-
-    //○Image入力時処理 済
-    //・入力時バリデーション。数値のみ 済
-    //
-
-    //○Coverラジオボタン処理　デフォルトは上 済
-    //・選択時、対応項目をアクティブ化。もう一方を非アクティブ化 済
-    //
-    //○Cover入力時処理 済 済
-    //・入力時バリデーション。数値のみ 済
-
-    //
-    //○テンプレパス入力処理 済
-    //・参照ボタン押下時、OpenFileDialogを開いて選択
-    //・バリデーションはなし。
-
-    //
-    //○実行ボタン押下時処理
-
-    //・view初期化処理
-    //・DataGridViewとdialog呼び出し
-    //・実行時エラーチェック
-    //-ffmpeg存在チェック
-    //-dat存在チェック
-    //-テンプレ存在チェック（worning）
-
-    //・プログレスダイアログ表示
-    //
-    //・DATチェック時
-    //※DAT読み出し処理
-    //
-    //・PEGチェック時
-    //※PEG抽出処理
-    //
-    //※リスト作成処理
-    //
-    //
-    //・処理結果表示（view呼び出し）
-    //-結果リストを入力
-    //
-    //○終了時処理 済
-    //・XML出力→My.settingsを使う
-    //
-
-    //○Error
-    //
-    //個別処理
-    //
-    //■DAT読み出し処理
-    //○read
-    //
-    //
-    //○Parse
-    //・抽出対象番号解釈
-    //・リスト作成
-    //
-    //
-    //
-    //○Error
-    //
-    //
-    //■PEG抽出処理
-    //○コマンド作成
-    //
-    //
-    //
-    //○コマンド実行（呼び出し）
-    //・フォルダなければ作成（result）
-    //
-    //
-    //○リスト作成
-    //
-    //○Error
     //
     //
     //
